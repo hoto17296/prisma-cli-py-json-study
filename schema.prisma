@@ -1,0 +1,36 @@
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator python {
+  provider               = "prisma-client-py"
+  interface              = "asyncio"
+  recursive_type_depth   = "5"
+  partial_type_generator = "partial_types.py"
+}
+
+/// @Python(instance_name: "parent")
+model Parent {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  children   Child[]
+  name       String
+  meta       Json
+
+  @@map("parent")
+}
+
+/// @Python(instance_name: "child")
+model Child {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  parent     Parent   @relation(fields: [parent_id], references: [id])
+  parent_id  String
+  name       String
+  meta       Json
+
+  @@index([parent_id])
+  @@map("child")
+}

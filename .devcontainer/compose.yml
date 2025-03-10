@@ -1,0 +1,22 @@
+services:
+  workspace:
+    build: .
+    command: sleep infinity
+    environment:
+      DATABASE_URL: postgresql://postgres:deadbeef@postgres/postgres
+      DEBUG: 1
+    volumes:
+      - ..:/workspace:cached
+      - cache:/root/.cache:delegated
+    working_dir: /workspace
+
+  postgres:
+    image: postgres:17
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: deadbeef
+
+volumes:
+  cache:
+  postgres:

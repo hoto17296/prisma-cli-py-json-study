@@ -1,0 +1,35 @@
+{
+  "name": "Prisma Client Python JSON Study",
+  "dockerComposeFile": ["compose.yml"],
+  "service": "workspace",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-python.python",
+        "Prisma.prisma"
+      ],
+      "settings": {
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true,
+          "editor.formatOnSaveMode": "file",
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        },
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma",
+          "editor.formatOnSave": true,
+          "editor.formatOnSaveMode": "file"
+        },
+        "python.languageServer": "Pylance",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.extraPaths": ["/workspace/backend/.venv/lib/python3.13/site-packages"]
+      }
+    }
+  }
+}
