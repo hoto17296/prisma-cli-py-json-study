@@ -3,6 +3,7 @@
   "dockerComposeFile": ["compose.yml"],
   "service": "workspace",
   "workspaceFolder": "/workspace",
+  "forwardPorts": [8000],
   "postCreateCommand": ".devcontainer/post-create.sh",
   "customizations": {
     "vscode": {
